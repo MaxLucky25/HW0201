@@ -29,7 +29,7 @@ export const userService = {
             id: newUser.id,
             login: newUser.login,
             email: newUser.email,
-            createdAt: new Date(),
+            createdAt: newUser.createdAt,
         };
     },
 
