@@ -7,11 +7,17 @@ export const userQueryRepository = {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = getUsersPaginationParams(query);
 
     const filter: any = {};
-        if(searchLoginTerm){
-            filter.login = {$regex: searchLoginTerm, $options: "i"};
+    const orConditions: any[] = [];
+        if (searchLoginTerm) {
+            orConditions.push({ login: { $regex: searchLoginTerm, $options: "i" } });
         }
-        if(searchEmailTerm){
-            filter.email = {$regex: searchEmailTerm, $options: "i"};
+
+        if (searchEmailTerm) {
+            orConditions.push({ email: { $regex: searchEmailTerm, $options: "i" } });
+        }
+
+        if (orConditions.length > 0) {
+            filter.$or = orConditions;
         }
 
         const totalCount = await userCollection.countDocuments(filter);
