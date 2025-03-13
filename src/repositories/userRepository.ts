@@ -28,7 +28,7 @@ export const userRepository = {
             login: input.login,
             password: hashedPassword,
             email: input.email,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString()
         };
         const result = await userCollection.insertOne(newUser);
         const createdUser = await userCollection.findOne({_id: result.insertedId});

@@ -7,7 +7,7 @@ export type UserDBType = {
     login: string;
     password: string;
     email: string;
-    createdAt: Date;
+    createdAt: string;
 };
 
 export type UserViewModel =Omit<UserDBType, '_id' | 'password'>;
